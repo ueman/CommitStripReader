@@ -18,9 +18,13 @@ namespace CommitStrip.Droid.Activities
             LayoutInflater inflater = LayoutInflater.From(this);
             View header = inflater.Inflate(Resource.Layout.item_actionbar_header, null);
 
-            ActionBar.SetDisplayShowCustomEnabled(true);
-            ActionBar.SetDisplayShowTitleEnabled(false);
-            ActionBar.CustomView = header;
+            SupportActionBar?.SetDisplayShowCustomEnabled(true);
+            SupportActionBar?.SetDisplayShowTitleEnabled(false);
+            if (SupportActionBar != null)
+            {
+                SupportActionBar.CustomView = header;
+            }
+            
         }
     }
 }

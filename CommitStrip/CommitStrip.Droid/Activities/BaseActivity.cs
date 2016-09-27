@@ -8,13 +8,14 @@ using Android.Content;
 using Android.OS;
 using CommitStrip.Core.ViewModels;
 using MvvmCross.Binding.BindingContext;
+using MvvmCross.Droid.Support.V7.AppCompat;
 using MvvmCross.Droid.Views;
 
 
 namespace CommitStrip.Droid.Activities
 {
     [Activity(Theme = "@style/AppTheme", Label = "BaseActivity")]
-    public class BaseActivity<T> : MvxActivity<T> where T : BaseViewModel
+    public class BaseActivity<T> : MvxAppCompatActivity<T> where T : BaseViewModel
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

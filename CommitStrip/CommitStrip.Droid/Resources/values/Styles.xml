@@ -1,14 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Set AppCompat’s color theming attrs -->
-    <item name="android:colorPrimary">@color/cs_blue</item>
-    <item name="android:colorPrimaryDark">@color/dark_cs_blue</item>
-    <item name="android:colorControlNormal">@color/white</item>
-    <!-- <item name="android:textColorPrimary">@color/white</item> -->
+    <item name="colorPrimary">@color/cs_blue</item>
+    <item name="colorPrimaryDark">@color/dark_cs_blue</item>
+    <item name="colorControlNormal">@color/white</item>
   </style>
   
   <style name="AppTheme.Splash" parent="android:Theme.NoTitleBar.Fullscreen">
     <item name="android:background">@color/cs_blue</item>
   </style>
+
+  <!--
+  <style name="AppActionBar" parent="android:Widget.Material.Light.ActionBar">
+    <item name="android:titleTextStyle">@style/AppActionBarTitle</item>
+  </style>
+
+  <style name="AppActionBarTitle" parent="android:TextAppearance.Material.Widget.ActionBar.Title.Inverse">
+    <item name="android:textColor">@color/white</item>
+  </style>
+  -->
 </resources>

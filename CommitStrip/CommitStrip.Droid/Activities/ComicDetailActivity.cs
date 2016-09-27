@@ -14,7 +14,7 @@ namespace CommitStrip.Droid.Activities
 
             SetContentView(Resource.Layout.view_comic_detail);
 
-            ActionBar.SetDisplayHomeAsUpEnabled(true);
+            SupportActionBar?.SetDisplayHomeAsUpEnabled(true);
             
         }
 
