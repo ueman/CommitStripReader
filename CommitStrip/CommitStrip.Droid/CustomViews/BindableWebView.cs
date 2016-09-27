@@ -21,9 +21,9 @@ namespace CommitStrip.Droid.CustomViews
             {
                 if (string.IsNullOrEmpty(value)) return;
 
-                _text = value;
+                _text = MakeHtml(value);
 
-                LoadData(_text, "text/html", "utf-8");
+                LoadData(_text, "text/html; charset=UTF-8", null);
                 UpdatedHtmlContent();
             }
         }
@@ -32,7 +32,17 @@ namespace CommitStrip.Droid.CustomViews
 
         private void UpdatedHtmlContent()
         {
+            Settings.SetSupportZoom(true);
             HtmlContentChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private string MakeHtml(string stuff)
+        {
+            return "<!DOCTYPE html><html><head><title></title>" +
+                   "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=yes\"/>" +
+                   "<meta name=\"charset\" content=\"utf-8\"/><style>html, body { margin: 0; padding: 0;" +
+                    "width: 100%; } img { width: 100%; height: auto; } </style>" +
+                   "</head><body>" + stuff + "</body></html>";
         }
     }
 }
