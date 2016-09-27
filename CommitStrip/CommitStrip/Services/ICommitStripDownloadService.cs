@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommitStrip.Core.Models;
 
@@ -6,6 +7,10 @@ namespace CommitStrip.Core.Services
 {
     public interface ICommitStripDownloadService
     {
-        Task<List<CommitStripItem>> DownloadCommitStrip(int page);
+        void DownloadComics(int page);
+
+        List<CommitStripItem> Comics { get; set; }
+
+        Action<DownloadInformation> DownloadHandler { get; set; }
     }
 }

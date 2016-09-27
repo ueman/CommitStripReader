@@ -8,6 +8,11 @@ namespace CommitStrip.Core.ViewModels
 {
     public class MainViewModel : BaseViewModel
     {
+
+        #region Properties
+
+        private ICommitStripDownloadService DownloadService { get; set; }
+
         private bool _laoding;
         public bool Loading
         {
@@ -38,12 +43,17 @@ namespace CommitStrip.Core.ViewModels
 
         private int Page { get; set; }
 
+        #endregion
 
-        public MainViewModel(INetworkConnectivityService _connectivityService) :base (_connectivityService)
+
+        public MainViewModel(   INetworkConnectivityService connectivityService,
+                                ICommitStripDownloadService downloadService) : base (connectivityService)
         {
+            DownloadService = downloadService;
+            DownloadService.DownloadHandler += DownloadHandler;
         }
 
-        public async void Init()
+        public void Init()
         {
             Page = 1;
             Title = "CommitStrip";
@@ -55,12 +65,22 @@ namespace CommitStrip.Core.ViewModels
         }
 
 
-        private async void OpenPage(int page)
+        public void DownloadHandler(DownloadInformation info)
+        {
+            if (info.Status == DownloadStatus.Success)
+            {
+                Comics = DownloadService.Comics;
+                Loading = false;
+            }
+        }
+
+        private void OpenPage(int page)
         {
             Loading = true;
-            Comics = await Mvx.Resolve<ICommitStripDownloadService>().DownloadCommitStrip(page);
-            Loading = false;
+            DownloadService.DownloadComics(page);
         }
+
+        #region Commands
 
         private MvxCommand<CommitStripItem> _selectComic;
         public IMvxCommand SelectComicCommand
@@ -110,6 +130,6 @@ namespace CommitStrip.Core.ViewModels
             OpenPage(Page);
         }
 
-
+        #endregion
     }
 }

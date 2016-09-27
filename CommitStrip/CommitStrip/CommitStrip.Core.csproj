@@ -36,6 +36,7 @@
     <Compile Include="App.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Models\CommitStripItem.cs" />
+    <Compile Include="Models\DownloadInformation.cs" />
     <Compile Include="Models\Json\JsonFeed.cs" />
     <Compile Include="Models\Json\JsonItem.cs" />
     <Compile Include="Models\Json\JsonRoot.cs" />

@@ -16,7 +16,11 @@ namespace CommitStrip.Core.Services
 {
     public class CommitStripDownloadService : ICommitStripDownloadService
     {
-        public async Task<List<CommitStripItem>> DownloadCommitStrip(int page)
+        public List<CommitStripItem> Comics { get; set; } 
+
+        public Action<DownloadInformation> DownloadHandler { get; set; } 
+
+        public async void DownloadComics(int page)
         {
             var s = new JsonRoot();
             s.items = new List<JsonItem>();
@@ -25,13 +29,15 @@ namespace CommitStrip.Core.Services
             {
                 var response = await new HttpClient().GetStringAsync(Constants.ComicFeedPage(page));
 
-                return ParseRss(response);
+                Comics = ParseRss(response);
+                DownloadHandler(new DownloadInformation(DownloadStatus.Success));
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
             }
-            return new List<CommitStripItem>();
+            Comics = new List<CommitStripItem>();
+            DownloadHandler(new DownloadInformation(DownloadStatus.Failed));
         }
 
         private List<CommitStripItem> ParseRss(string rss)
