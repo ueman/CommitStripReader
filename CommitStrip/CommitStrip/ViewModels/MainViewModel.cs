@@ -58,10 +58,6 @@ namespace CommitStrip.Core.ViewModels
             Page = 1;
             Title = "CommitStrip";
             OpenPage(Page);
-            if (ConnectivityService.IsConnected())
-            {
-                //TODO
-            }
         }
 
 
@@ -72,12 +68,23 @@ namespace CommitStrip.Core.ViewModels
                 Comics = DownloadService.Comics;
                 Loading = false;
             }
+            else
+            {
+                //TODO handle no downloads correctly
+            }
         }
 
         private void OpenPage(int page)
         {
-            Loading = true;
-            DownloadService.DownloadComics(page);
+            if (ConnectivityService.IsConnected())
+            {
+                Loading = true;
+                DownloadService.DownloadComics(page);
+            }
+            else
+            {
+                //TODO handle no network correctly
+            }
         }
 
         #region Commands
