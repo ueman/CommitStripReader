@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using CommitStrip.Core.Model;
-using CommitStrip.Core.Model.JsonModel;
+using System.Xml.Linq;
+using CommitStrip.Core.Common;
+using CommitStrip.Core.Models;
+using CommitStrip.Core.Models.JsonModel;
 using CommitStrip.Core.Parser;
+using CommitStrip.Core.Utilities;
 using Newtonsoft.Json;
 
 namespace CommitStrip.Core.Services
 {
     public class CommitStripDownloadService : ICommitStripDownloadService
     {
-
-        // data ist im format http://www.commitstrip.com/en/feed/?paged=1
-        // http://rss2json.com/api.json?rss_url=http://www.commitstrip.com/en/feed/?paged=1
         public async Task<List<CommitStripItem>> DownloadCommitStrip(int page)
         {
             var s = new JsonRoot();
@@ -22,25 +23,9 @@ namespace CommitStrip.Core.Services
             s.items.Add(new JsonItem());
             try
             {
-                var response = await new HttpClient().GetStringAsync("http://rss2json.com/api.json?rss_url=http://www.commitstrip.com/en/feed/?paged="+page);
-                var root = JsonConvert.DeserializeObject<JsonRoot>(response);
-                var comics = new List<CommitStripItem>();
-                if (root.status.Equals("ok"))
-                {
-                    foreach (var jsonItem in root.items)
-                    {
-                        var comic = new CommitStripItem()
-                        {
-                            Categories = jsonItem.categories,
-                            Description = jsonItem.description,
-                            Link = jsonItem.link,
-                            Title = jsonItem.title,
-                            ImageLink = ComicParser.GetImageLink(jsonItem.content)
-                        };
-                        comics.Add(comic);
-                    }
-                }
-                return comics;
+                var response = await new HttpClient().GetStringAsync(Constants.ComicFeedPage(page));
+
+                return ParseRss(response);
             }
             catch (Exception e)
             {
@@ -48,5 +33,30 @@ namespace CommitStrip.Core.Services
             }
             return new List<CommitStripItem>();
         }
+
+        private List<CommitStripItem> ParseRss(string rss)
+        {
+            var xdoc = XDocument.Parse(rss);
+            var id = 0;
+
+            var comics = new List<CommitStripItem>();
+            var items = xdoc.Descendants("item");
+            XNamespace nsContent = "http://purl.org/rss/1.0/modules/content/";
+
+            foreach (var item in items)
+            {
+                var comic = new CommitStripItem()
+                {
+                    Title = (string) item.Element("title"),
+                    Description =  (string) item.Element(nsContent + "encoded"),
+                    Link = (string) item.Element("link"),
+                    //PubDate = DateTime.Now, // TODO: parse date
+                    ImageLink = ComicParser.GetImageLink((string) item.Element(nsContent + "encoded")),
+                    Id = StringHelper.RemoveSpecialCharacters((string)item.Element("link"))
+                };
+                comics.Add(comic);
+            }
+            return comics;
+        } 
     }
 }

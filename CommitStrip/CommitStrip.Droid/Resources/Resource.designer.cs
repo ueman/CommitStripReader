@@ -47,6 +47,8 @@ namespace CommitStrip.Droid
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView = global::CommitStrip.Droid.Resource.Styleable.MvxListView;
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate = global::CommitStrip.Droid.Resource.Styleable.MvxListView_MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Styleable.MvxListView_MvxItemTemplate = global::CommitStrip.Droid.Resource.Styleable.MvxListView_MvxItemTemplate;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.ApplicationName = global::CommitStrip.Droid.Resource.String.ApplicationName;
+			global::MvvmCross.Plugins.Sqlite.Droid.Resource.String.Hello = global::CommitStrip.Droid.Resource.String.Hello;
 		}
 		
 		public partial class Attribute
@@ -83,6 +85,28 @@ namespace CommitStrip.Droid
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int cs_blue = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int dark_cs_blue = 2131099649;
+			
+			// aapt resource value: 0x7f060002
+			public const int white = 2131099650;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -105,14 +129,11 @@ namespace CommitStrip.Droid
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int MvvmCrossTagId = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int MvvmCrossTagId = 2131034112;
 			
-			// aapt resource value: 0x7f040001
-			public const int MvxBindingTagUnique = 2130968577;
-			
-			// aapt resource value: 0x7f040002
-			public const int image = 2130968578;
+			// aapt resource value: 0x7f050001
+			public const int MvxBindingTagUnique = 2131034113;
 			
 			static Id()
 			{
@@ -139,6 +160,9 @@ namespace CommitStrip.Droid
 			// aapt resource value: 0x7f030003
 			public const int view_main = 2130903043;
 			
+			// aapt resource value: 0x7f030004
+			public const int view_splash = 2130903044;
+			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -152,11 +176,17 @@ namespace CommitStrip.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int app_name = 2131034113;
+			// aapt resource value: 0x7f040001
+			public const int ApplicationName = 2130968577;
 			
-			// aapt resource value: 0x7f050000
-			public const int hello = 2131034112;
+			// aapt resource value: 0x7f040000
+			public const int Hello = 2130968576;
+			
+			// aapt resource value: 0x7f040003
+			public const int app_name = 2130968579;
+			
+			// aapt resource value: 0x7f040002
+			public const int hello = 2130968578;
 			
 			static String()
 			{
@@ -164,6 +194,25 @@ namespace CommitStrip.Droid
 			}
 			
 			private String()
+			{
+			}
+		}
+		
+		public partial class Style
+		{
+			
+			// aapt resource value: 0x7f070000
+			public const int AppTheme = 2131165184;
+			
+			// aapt resource value: 0x7f070001
+			public const int AppTheme_Splash = 2131165185;
+			
+			static Style()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Style()
 			{
 			}
 		}

@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace CommitStrip.Core.Model.JsonModel
+namespace CommitStrip.Core.Models.JsonModel
 {
     public class JsonFeed
     {

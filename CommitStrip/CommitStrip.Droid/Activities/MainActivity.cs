@@ -1,13 +1,13 @@
 using Android.App;
 using Android.OS;
 using Android.Views;
-using CommitStrip.Core.ViewModel;
+using CommitStrip.Core.ViewModels;
 using MvvmCross.Droid.Views;
 
 namespace CommitStrip.Droid.Activities
 {
-    [Activity(Label = "CommitStrip", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : MvxActivity<MainViewModel>
+    [Activity(Label = "CommitStrip", Theme = "@style/AppTheme")]
+    public class MainActivity : BaseActivity<MainViewModel>
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {

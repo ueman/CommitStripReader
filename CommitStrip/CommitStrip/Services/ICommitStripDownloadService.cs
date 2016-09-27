@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using CommitStrip.Core.Model;
+using CommitStrip.Core.Models;
 
 namespace CommitStrip.Core.Services
 {

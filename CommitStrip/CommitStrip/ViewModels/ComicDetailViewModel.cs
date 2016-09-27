@@ -1,8 +1,10 @@
-﻿using MvvmCross.Core.ViewModels;
+﻿using CommitStrip.Core.Models;
+using CommitStrip.Core.Services;
+using MvvmCross.Core.ViewModels;
 
-namespace CommitStrip.Core.ViewModel
+namespace CommitStrip.Core.ViewModels
 {
-    public class ComicDetailViewModel : MvxViewModel
+    public class ComicDetailViewModel : BaseViewModel
     {
         private string _imageLink;
 
@@ -16,9 +18,18 @@ namespace CommitStrip.Core.ViewModel
             }
         }
 
-        public void Init(string link)
+        public string Comic { get; set; }
+
+        public ComicDetailViewModel(INetworkConnectivityService _connectivityService) : base(_connectivityService)
         {
-            ImageLink = link;
+            
+        }
+
+        public void Init(string comic, string title)
+        {
+            Title = title;
+            ImageLink = "";
+            Comic = comic;
         }
     }
 }
