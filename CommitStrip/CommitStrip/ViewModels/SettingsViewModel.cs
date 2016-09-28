@@ -5,11 +5,18 @@ namespace CommitStrip.Core.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        public string Title { get; set; }
+        public new string Title { get; set; }
+
+        public string CsButtonTitle { get; set; }
 
         public SettingsViewModel(INetworkConnectivityService connectivityService) : base(connectivityService)
         {
+        }
+
+        public void Init()
+        {
             Title = "Settings";
+            CsButtonTitle = "CommitStrip Webpage";
         }
 
         #region Commands
