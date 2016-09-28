@@ -1968,7 +1968,10 @@ namespace CommitStrip.Droid
 			public const int view_main = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int view_splash = 2130903081;
+			public const int view_settings = 2130903081;
+			
+			// aapt resource value: 0x7f03002a
+			public const int view_splash = 2130903082;
 			
 			static Layout()
 			{
