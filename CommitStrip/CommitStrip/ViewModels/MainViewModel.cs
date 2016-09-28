@@ -137,6 +137,21 @@ namespace CommitStrip.Core.ViewModels
             OpenPage(Page);
         }
 
+        private MvxCommand _openSettingsCommand;
+        public IMvxCommand OpenSettingsPageCommand
+        {
+            get
+            {
+                _openSettingsCommand = _openSettingsCommand ?? new MvxCommand(OpenSettingsPage);
+                return _openSettingsCommand;
+            }
+        }
+
+        private void OpenSettingsPage()
+        {
+            //show settings/imprint
+        }
+
         #endregion
     }
 }

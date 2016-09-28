@@ -1491,13 +1491,16 @@ namespace CommitStrip.Droid
 			public const int abc_textfield_search_material = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int Icon = 2130837579;
+			public const int ic_settings_white_24dp = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int logo = 2130837580;
+			public const int Icon = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int notification_template_icon_bg = 2130837581;
+			public const int logo = 2130837581;
+			
+			// aapt resource value: 0x7f02004e
+			public const int notification_template_icon_bg = 2130837582;
 			
 			static Drawable()
 			{
@@ -1727,6 +1730,9 @@ namespace CommitStrip.Droid
 			
 			// aapt resource value: 0x7f0b0051
 			public const int select_dialog_listview = 2131427409;
+			
+			// aapt resource value: 0x7f0b005f
+			public const int settings = 2131427423;
 			
 			// aapt resource value: 0x7f0b003c
 			public const int shortcut = 2131427388;
@@ -1970,6 +1976,22 @@ namespace CommitStrip.Droid
 			}
 			
 			private Layout()
+			{
+			}
+		}
+		
+		public partial class Menu
+		{
+			
+			// aapt resource value: 0x7f0c0000
+			public const int main_activity_menu = 2131492864;
+			
+			static Menu()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Menu()
 			{
 			}
 		}

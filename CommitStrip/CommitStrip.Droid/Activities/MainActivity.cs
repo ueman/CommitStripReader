@@ -26,5 +26,23 @@ namespace CommitStrip.Droid.Activities
             }
             
         }
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater inflater = MenuInflater;
+            inflater.Inflate(Resource.Menu.main_activity_menu, menu);
+            return true;
+        }
+
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.settings:
+                    ViewModel.OpenSettingsPageCommand.Execute();
+                    return true;
+            }
+            return base.OnOptionsItemSelected(item);
+        }
     }
 }
