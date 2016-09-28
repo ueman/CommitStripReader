@@ -149,7 +149,7 @@ namespace CommitStrip.Core.ViewModels
 
         private void OpenSettingsPage()
         {
-            //show settings/imprint
+            ShowViewModel<SettingsViewModel>();
         }
 
         #endregion
