@@ -21,6 +21,7 @@ namespace CommitStrip.Core.Services
 
         public async void DownloadComics(int page)
         {
+            var success = false;
             var s = new JsonRoot();
             s.items = new List<JsonItem>();
             s.items.Add(new JsonItem());
@@ -29,14 +30,22 @@ namespace CommitStrip.Core.Services
                 var response = await new HttpClient().GetStringAsync(Constants.ComicFeedPage(page));
 
                 Comics = ParseRss(response);
-                DownloadHandler(new DownloadInformation(DownloadStatus.Success));
+                success = true;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
             }
             Comics = new List<CommitStripItem>();
-            DownloadHandler(new DownloadInformation(DownloadStatus.Failed));
+            if (success)
+            {
+                DownloadHandler(new DownloadInformation(DownloadStatus.Success));
+            }
+            else
+            {
+                DownloadHandler(new DownloadInformation(DownloadStatus.Failed));
+            }
+            
         }
 
         private List<CommitStripItem> ParseRss(string rss)
