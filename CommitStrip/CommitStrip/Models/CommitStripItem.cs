@@ -12,9 +12,9 @@ namespace CommitStrip.Core.Models
 
         public string Link { get; set; }
 
-        //public DateTime PubDate { get; set; }
+        public DateTime PubDate { get; set; }
 
-        //public List<string> Categories { get; set; }
+        public List<string> Categories { get; set; }
 
         public string Description { get; set; }
 

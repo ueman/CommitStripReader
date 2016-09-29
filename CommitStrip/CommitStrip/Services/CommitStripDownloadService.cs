@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
 using CommitStrip.Core.Common;
@@ -40,7 +42,6 @@ namespace CommitStrip.Core.Services
         private List<CommitStripItem> ParseRss(string rss)
         {
             var xdoc = XDocument.Parse(rss);
-            var id = 0;
 
             var comics = new List<CommitStripItem>();
             var items = xdoc.Descendants("item");
@@ -48,18 +49,26 @@ namespace CommitStrip.Core.Services
 
             foreach (var item in items)
             {
+                var categoryList = item.Elements("category").Select(category => (string) category).ToList();
                 var comic = new CommitStripItem()
                 {
                     Title = (string) item.Element("title"),
                     Description =  (string) item.Element(nsContent + "encoded"),
                     Link = (string) item.Element("link"),
-                    //PubDate = DateTime.Now, // TODO: parse date
+                    PubDate = parseTime((string) item.Element("pubDate")),
                     ImageLink = ComicParser.GetImageLink((string) item.Element(nsContent + "encoded")),
-                    Id = StringHelper.RemoveSpecialCharacters((string)item.Element("link"))
+                    Id = StringHelper.RemoveSpecialCharacters((string)item.Element("link")),
+                    Categories = categoryList
                 };
                 comics.Add(comic);
             }
             return comics;
-        } 
+        }
+
+        private DateTime parseTime(string dateString)
+        {
+            string parseFormat = "ddd, dd MMM yyyy HH:mm:ss zzz";
+            return DateTime.ParseExact(dateString, parseFormat, CultureInfo.InvariantCulture);
+        }
     }
 }
