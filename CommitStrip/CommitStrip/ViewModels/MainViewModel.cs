@@ -2,7 +2,6 @@
 using CommitStrip.Core.Models;
 using CommitStrip.Core.Services;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Platform;
 
 namespace CommitStrip.Core.ViewModels
 {

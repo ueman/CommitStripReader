@@ -2,7 +2,6 @@ using Android.App;
 using Android.OS;
 using Android.Views;
 using CommitStrip.Core.ViewModels;
-using MvvmCross.Droid.Views;
 
 namespace CommitStrip.Droid.Activities
 {

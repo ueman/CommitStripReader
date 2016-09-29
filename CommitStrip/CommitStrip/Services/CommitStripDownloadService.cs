@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using CommitStrip.Core.Common;
 using CommitStrip.Core.Models;
 using CommitStrip.Core.Models.JsonModel;
 using CommitStrip.Core.Parser;
 using CommitStrip.Core.Utilities;
-using Newtonsoft.Json;
 
 namespace CommitStrip.Core.Services
 {
