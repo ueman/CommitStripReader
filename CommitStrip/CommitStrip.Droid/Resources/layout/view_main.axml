@@ -31,6 +31,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:indeterminate="true"
-        android:layout_gravity="center_horizontal|center_vertical"
+        android:layout_gravity="center"
         local:MvxBind="Visible Loading" />
 </LinearLayout>
