@@ -21,5 +21,7 @@
         {
             return ComicFeedJson + "?paged=" + page;
         }
+
+        public static string CommitStripLink = "http://commitstrip.com/";
     }
 }

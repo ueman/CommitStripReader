@@ -1,5 +1,8 @@
-﻿using CommitStrip.Core.Services;
+﻿using CommitStrip.Core.Common;
+using CommitStrip.Core.Services;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Plugins.WebBrowser;
 
 namespace CommitStrip.Core.ViewModels
 {
@@ -33,7 +36,8 @@ namespace CommitStrip.Core.ViewModels
 
         private void OpenCsWebPage()
         {
-            //show commit strip page
+            var task = Mvx.Resolve<IMvxWebBrowserTask>();
+            task.ShowWebPage(Constants.CommitStripLink);
         }
 
         #endregion
