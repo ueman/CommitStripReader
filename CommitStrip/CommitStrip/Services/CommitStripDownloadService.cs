@@ -22,6 +22,7 @@ namespace CommitStrip.Core.Services
         public async void DownloadComics(int page)
         {
             var success = false;
+            Comics = new List<CommitStripItem>();
             var s = new JsonRoot();
             s.items = new List<JsonItem>();
             s.items.Add(new JsonItem());
@@ -36,7 +37,6 @@ namespace CommitStrip.Core.Services
             {
                 Debug.WriteLine(e.ToString());
             }
-            Comics = new List<CommitStripItem>();
             if (success)
             {
                 DownloadHandler(new DownloadInformation(DownloadStatus.Success));
