@@ -1970,9 +1970,6 @@ namespace CommitStrip.Droid
 			// aapt resource value: 0x7f030029
 			public const int view_settings = 2130903081;
 			
-			// aapt resource value: 0x7f03002a
-			public const int view_splash = 2130903082;
-			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

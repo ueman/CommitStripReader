@@ -216,9 +216,6 @@
     <AndroidResource Include="Resources\layout\item_actionbar_header.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\view_splash.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
     <AndroidResource Include="Resources\layout\view_settings.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
