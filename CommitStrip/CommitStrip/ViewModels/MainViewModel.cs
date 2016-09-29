@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Acr.UserDialogs;
 using CommitStrip.Core.Models;
 using CommitStrip.Core.Services;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 
 namespace CommitStrip.Core.ViewModels
 {
@@ -67,9 +69,13 @@ namespace CommitStrip.Core.ViewModels
                 Comics = DownloadService.Comics;
                 Loading = false;
             }
+            else if (info.Status == DownloadStatus.Failed)
+            {
+                Mvx.Resolve<IUserDialogs>().Alert("Downloading failed", "", "Ok");
+            }
             else
             {
-                //TODO handle no downloads correctly
+                Mvx.Resolve<IUserDialogs>().Alert("This page doesn't exist", "", "Ok");
             }
         }
 
@@ -82,7 +88,7 @@ namespace CommitStrip.Core.ViewModels
             }
             else
             {
-                //TODO handle no network correctly
+                Mvx.Resolve<IUserDialogs>().Alert("There is no network connection", "No Network Connection", "Ok");
             }
         }
 
