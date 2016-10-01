@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Acr.UserDialogs;
 using CommitStrip.Core.Models;
 using CommitStrip.Core.Services;
@@ -14,6 +15,8 @@ namespace CommitStrip.Core.ViewModels
 
         private ICommitStripDownloadService DownloadService { get; set; }
 
+        private IUserDialogs DialogService { get; set; }
+
         private bool _laoding;
         public bool Loading
         {
@@ -26,8 +29,8 @@ namespace CommitStrip.Core.ViewModels
             }
         }
 
-        public bool NotLoading { get { return !Loading; } }
-
+        public bool NotLoading => !Loading;
+            
         private List<CommitStripItem> _comics; 
         public List<CommitStripItem> Comics {
             get
@@ -42,7 +45,17 @@ namespace CommitStrip.Core.ViewModels
             }
         }
 
-        private int Page { get; set; }
+        private int _page;
+        public int Page
+        {
+            get { return _page; }
+            set
+            {
+                _page = value;
+                RaisePropertyChanged(() => Page);
+                OpenPage(_page);
+            }
+        }
 
         #endregion
 
@@ -56,9 +69,9 @@ namespace CommitStrip.Core.ViewModels
 
         public void Init()
         {
-            Page = 1;
             Title = "CommitStrip";
-            OpenPage(Page);
+            Page = 1;
+            DialogService = Mvx.Resolve<IUserDialogs>();
         }
 
 
@@ -71,11 +84,11 @@ namespace CommitStrip.Core.ViewModels
             }
             else if (info.Status == DownloadStatus.Failed)
             {
-                Mvx.Resolve<IUserDialogs>().Alert("Downloading failed", "", "Ok");
+                DialogService.Alert("Downloading failed", "", "Ok");
             }
             else
             {
-                Mvx.Resolve<IUserDialogs>().Alert("This page doesn't exist", "", "Ok");
+                DialogService.Alert("This page doesn't exist", "", "Ok");
             }
         }
 
@@ -88,7 +101,7 @@ namespace CommitStrip.Core.ViewModels
             }
             else
             {
-                Mvx.Resolve<IUserDialogs>().Alert("There is no network connection", "No Network Connection", "Ok");
+                DialogService.Alert("There is no network connection", "No Network Connection", "Ok");
             }
         }
 
@@ -123,7 +136,6 @@ namespace CommitStrip.Core.ViewModels
         {
             if (Page == 1) return;
             Page -= 1;
-            OpenPage(Page);
         }
 
         private MvxCommand _nextPageCommand;
@@ -139,7 +151,6 @@ namespace CommitStrip.Core.ViewModels
         private void OpenNextPage()
         {
             Page += 1;
-            OpenPage(Page);
         }
 
         private MvxCommand _openSettingsCommand;

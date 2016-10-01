@@ -10,17 +10,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top">
         <Button
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Previous"
-          local:MvxBind="Click OpenPreviousPageCommand"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Previous"
+            local:MvxBind="Click OpenPreviousPageCommand" />
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            local:MvxBind="Text IntToString(Page)" />
         <Button
-          android:layout_width="0dp"
-          android:layout_height="wrap_content"
-          android:layout_weight="1"
-          android:text="Next"
-          local:MvxBind="Click OpenNextPageCommand"/>
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Next"
+            local:MvxBind="Click OpenNextPageCommand" />
     </LinearLayout>
     <Mvx.MvxListView
         android:layout_width="match_parent"

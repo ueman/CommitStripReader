@@ -14,13 +14,12 @@ namespace CommitStrip.Droid.Activities
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            UserDialogs.Init(Application);
             base.OnCreate(savedInstanceState);
-
+            
             var set = this.CreateBindingSet<BaseActivity<T>, T>();
             set.Bind(SupportActionBar).For(v => v.Title).To(vm => vm.Title);
             set.Apply();
-
-            UserDialogs.Init(() => this);
         }
     }
 }
