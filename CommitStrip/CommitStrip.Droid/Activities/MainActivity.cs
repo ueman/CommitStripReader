@@ -1,5 +1,6 @@
 using Android.App;
 using Android.OS;
+using Android.Support.V7.Widget;
 using Android.Views;
 using CommitStrip.Core.ViewModels;
 
@@ -14,16 +15,9 @@ namespace CommitStrip.Droid.Activities
 
             SetContentView(Resource.Layout.view_main);
 
-            LayoutInflater inflater = LayoutInflater.From(this);
-            View header = inflater.Inflate(Resource.Layout.item_actionbar_header, null);
-
             SupportActionBar?.SetDisplayShowCustomEnabled(true);
             SupportActionBar?.SetDisplayShowTitleEnabled(false);
-            if (SupportActionBar != null)
-            {
-                SupportActionBar.CustomView = header;
-            }
-            
+            SupportActionBar?.SetCustomView(Resource.Layout.item_actionbar_header);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)

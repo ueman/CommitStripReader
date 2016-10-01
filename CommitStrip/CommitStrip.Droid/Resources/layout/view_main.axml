@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:inputType="number"
+            android:gravity="center"
             local:MvxBind="Text IntToString(Page)" />
         <Button
             android:layout_width="0dp"
