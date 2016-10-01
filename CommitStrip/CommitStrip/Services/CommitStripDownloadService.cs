@@ -32,15 +32,11 @@ namespace CommitStrip.Core.Services
 
                 Comics = ParseRss(response);
                 status = DownloadStatus.Success;
-                if (Comics.Count == 0)
-                {
-                    // the requested page doesn't exist
-                    status = DownloadStatus.NoMorePages;
-                }
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.ToString());
+                status = DownloadStatus.NoMorePages;
             }
             DownloadHandler(new DownloadInformation(status));
             
