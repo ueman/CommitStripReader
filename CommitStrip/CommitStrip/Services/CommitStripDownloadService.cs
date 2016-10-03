@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Xml.Linq;
 using CommitStrip.Core.Common;
+using CommitStrip.Core.Helpers;
 using CommitStrip.Core.Models;
 using CommitStrip.Core.Models.JsonModel;
 using CommitStrip.Core.Parser;
@@ -17,7 +18,14 @@ namespace CommitStrip.Core.Services
     {
         public List<CommitStripItem> Comics { get; set; } 
 
-        public Action<DownloadInformation> DownloadHandler { get; set; } 
+        public Action<DownloadInformation> DownloadHandler { get; set; }
+
+        private readonly HttpClient Client;
+
+        public CommitStripDownloadService()
+        {
+            Client = new HttpClient();
+        }
 
         public async void DownloadComics(int page)
         {
@@ -28,10 +36,12 @@ namespace CommitStrip.Core.Services
             s.items.Add(new JsonItem());
             try
             {
-                var response = await new HttpClient().GetStringAsync(Constants.ComicFeedPage(page));
+                var url = Constants.ComicFeedPage(page, Settings.ComicLanguageSettings);
+                Client.DefaultRequestHeaders.Clear();
+                Client.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", "USER_LANG="+Settings.ComicLanguageSettings+";");
+                var response = await Client.GetStringAsync(url);
 
                 Comics = ParseRss(response);
-                status = DownloadStatus.Success;
             }
             catch (Exception e)
             {
@@ -39,7 +49,6 @@ namespace CommitStrip.Core.Services
                 status = DownloadStatus.NoMorePages;
             }
             DownloadHandler(new DownloadInformation(status));
-            
         }
 
         private List<CommitStripItem> ParseRss(string rss)

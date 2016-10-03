@@ -11,18 +11,15 @@ namespace CommitStrip.Core.Helpers
   /// </summary>
   public static class Settings
   {
-    private static ISettings AppSettings
-    {
-      get
-      {
-        return CrossSettings.Current;
-      }
-    }
+    private static ISettings AppSettings => CrossSettings.Current;
 
-    #region Setting Constants
+      #region Setting Constants
 
     private const string SettingsKey = "settings_key";
     private static readonly string SettingsDefault = string.Empty;
+
+    private const string ComicLanguageKey = "Language_key";
+    private static readonly string ComicLanguageDefault = "en";
 
     #endregion
 
@@ -39,5 +36,17 @@ namespace CommitStrip.Core.Helpers
       }
     }
 
-  }
+    public static string ComicLanguageSettings
+    {
+        get
+        {
+            return AppSettings.GetValueOrDefault<string>(ComicLanguageKey, ComicLanguageDefault);
+        }
+        set
+        {
+            AppSettings.AddOrUpdateValue<string>(ComicLanguageKey, value);
+        }
+    }
+
+    }
 }
